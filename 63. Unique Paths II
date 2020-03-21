@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int solve(int i,int j,int m,int n , vector<vector<int>>&v,vector<vector<int>>&dp)
+{
+    
+	if(i==m-1 and j==n-1)return 1-v[i][j];
+    
+    if(dp[i][j]!=-1)return dp[i][j];
+    
+    if(v[i][j]) 
+        dp[i][j]=0;
+    else 
+    {
+    dp[i][j]=0;
+    if(j+1<n)
+    	dp[i][j]+=(solve(i,j+1,m,n,v,dp));
+    if(i+1<m)
+    	dp[i][j]+=(solve(i+1,j,m,n,v,dp));
+    }
+    return dp[i][j];
+}
+
+
+    int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
+        int m=obstacleGrid.size();//rows
+        int n=obstacleGrid[0].size();//cols
+vector<vector<int>> dp (m,vector<int>(n,-1));
+	return solve(0,0,m,n,obstacleGrid,dp);
+    }
+};
