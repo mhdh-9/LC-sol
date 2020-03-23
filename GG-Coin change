@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define up(i,j,n) for (int i=j; i < int(n); i++)
+#define dn(i,j,n) for (int i=j; i > int(n); i--)
+#define pb push_back
+#define mp make_pair
+
+    vector<vector<int>> dp;
+    int sum(int m,int s,vector<int> & v )
+    {
+        if(s<0 or m<0)return 0;
+        if(dp[m][s]!=-1)return dp[m][s];
+        if(s==0)return dp[m][s]=1;
+        dp[m][s]=sum(m,s-v[m],v)+sum(m-1,s,v);
+        return dp[m][s];
+    }
+int main()
+ {
+	int t ; cin>>t;
+	while(t--)
+	{
+	    int n ;cin>>n;vector<int> a(n);
+	    up(i,0,n)cin>>a[i];
+	    int target ;cin>>target;
+	    dp.resize(n,vector<int>(target+1,-1) );
+	    cout<<sum(n-1,target,a)<<"\n";
+	    dp.clear();
+	}
+	return 0;
+}
