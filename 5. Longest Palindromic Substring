@@ -1,0 +1,38 @@
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        
+        int k=s.size();
+        if(k<=1)return s;
+        
+        vector<int>prev(k),prev2(k),ans(k);
+        //we only to remember two previous rows  
+        
+        int m=1;int n=0;
+        
+        for(int i=0;i<k;i++)prev2[i]=1;
+        
+        for(int i=0;i<k-1;i++)
+        {
+            prev[i]=(s[i]==s[i+1])?2:0;
+            if(m<prev[i])m=prev[i],n=i;
+        }
+        
+        for(int z=2;z<k;z++)       //size
+        {
+            for(int i=0;i+z<k;i++) //start
+            {
+            int j=i+z;
+            if(s[i]==s[j] and prev2[i+1])
+            {
+                ans[i]=2+prev2[i+1];
+                if(m<ans[i])m=ans[i],n=i;
+            }
+            else ans[i]=0;                
+            }
+            prev2=prev;
+            prev=ans;
+        }
+        return s.substr(n,m);
+    }
+};
