@@ -10,19 +10,20 @@ public:
         
         int m=1;int n=0;
         
-        for(int i=0;i<k;i++)prev2[i]=1;
+        for(int i=0;i<k;i++)prev2[i]=1;                     //length =1
         
-        for(int i=0;i<k-1;i++)
+        for(int i=0;i<k-1;i++)                              //length =2
         {
             prev[i]=(s[i]==s[i+1])?2:0;
-            if(m<prev[i])m=prev[i],n=i;
+            if(m<prev[i])
+                m=prev[i],n=i;
         }
-        
-        for(int z=2;z<k;z++)       //size
+                                                                        
+        for(int z=2;z<k;z++)                  //size                    //length>2
         {
-            for(int i=0;i+z<k;i++) //start
+            for(int i=0;i+z<k;i++)            //start
             {
-            int j=i+z;
+            int j=i+z;                        //end
             if(s[i]==s[j] and prev2[i+1])
             {
                 ans[i]=2+prev2[i+1];
