@@ -9,6 +9,7 @@
         
         vector<bool> dp(m,false);
 	    
+	    //dp[i] tells str[0--i] meets the condition or not
 	    
 	    dp[0]=(s.find(str.substr(0,1))!=s.end());
 	    
