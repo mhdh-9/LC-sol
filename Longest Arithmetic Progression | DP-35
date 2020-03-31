@@ -1,0 +1,20 @@
+int longestArithSeqLength(vector<int>& v) {
+int mx=0,n=v.size();
+
+//use map bcz common diff can negative
+vector<unordered_map<int,int>>dp(n); 
+for (int i=n-2; i >=0; i--)
+{
+    for (int j=i+1; j < n; j++)
+    {   
+            
+    if( dp[j].find(v[j]-v[i])!= dp[j].end() )
+        dp[i][v[j]-v[i]]=max(dp[i][v[j]-v[i]],1+dp[j][v[j]-v[i]]);
+        
+    else dp[i][v[j]-v[i]]=max(dp[i][v[j]-v[i]],1);
+        
+    mx=max(mx,dp[i][v[j]-v[i]]);
+    } 
+}    
+	return 1+mx;  
+    }
