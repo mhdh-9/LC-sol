@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int leastInterval(vector<char>& tasks, int n) {
+        int mx=0,c=0;
+        
+        int m[26]={0};
+        for(auto i:tasks)
+            m[i-'A']++,
+            mx=max(mx,m[i-'A']);
+        
+        //number of max task
+        for(auto i:m)
+            if(i==mx)
+                c++;
+        
+        //we are treating all the max task as a single entity
+        //thus reducing the idle distance to (n-c+1);
+        
+        int empty_slots = (mx-1)*(n-c+1);
+        
+        int non_max_tasks =  tasks.size()-c*mx;
+        
+        int idle_slots = max(0,empty_slots - non_max_tasks);
+        
+        int ans = tasks.size() + idle_slots ;
+        
+        return ans;
+    }
+};
